@@ -1,101 +1,76 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { FaLink, FaVideo } from "react-icons/fa";
+import InstantMeeting from "@/app/modals/InstantMeeting";
+import UpcomingMeeting from "@/app/modals/UpcomingMeeting";
+import CreateLink from "@/app/modals/CreateLink";
+import JoinMeeting from "@/app/modals/JoinMeeting";
 
-export default function Home() {
+export default function Dashboard() {
+  const [startInstantMeeting, setStartInstantMeeting] =
+    useState<boolean>(false);
+  const [joinMeeting, setJoinMeeting] = useState<boolean>(false);
+  const [showUpcomingMeetings, setShowUpcomingMeetings] =
+    useState<boolean>(false);
+  const [showCreateLink, setShowCreateLink] = useState<boolean>(false);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <button
+        className=' top-5 right-5 text-sm fixed bg-green-500 px-2 w-[150px] hover:bg-green-600 py-3 flex flex-col items-center text-white rounded-md shadow-sm cursor-pointer z-10'
+        onClick={() => setJoinMeeting(true)}
+      >
+        <FaVideo className='mb-[3px] text-white' />
+        Join MeetHub
+      </button>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <main className='w-full h-screen flex flex-col items-center justify-center'>
+        <h1 className='font-bold text-2xl text-center'>MeetHub</h1>
+        <div className='flex flex-col'>
+          <button
+            className='text-green-500 underline text-sm text-center cursor-pointer'
+            onClick={() => setShowUpcomingMeetings(true)}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Upcoming MeetHub
+          </button>
+        </div>
+
+        <div className='flex items-center justify-center space-x-4 mt-6'>
+          <button
+            className='bg-gray-500 px-4 w-[200px] py-3 flex flex-col items-center hover:bg-gray-600 text-white rounded-md shadow-sm'
+            onClick={() => setShowCreateLink(true)}
           >
-            Read our docs
-          </a>
+            <FaLink className='mb-[3px] text-gray-300' />
+            Create link
+          </button>
+          <button
+            className='bg-green-500 px-4 w-[200px] hover:bg-green-600 py-3 flex flex-col items-center text-white rounded-md shadow-sm'
+            onClick={() => setStartInstantMeeting(true)}
+          >
+            <FaVideo className='mb-[3px] text-white' />
+            New MeetHub
+          </button>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+      {startInstantMeeting && (
+        <InstantMeeting
+          enable={startInstantMeeting}
+          setEnable={setStartInstantMeeting}
+        />
+      )}
+      {showUpcomingMeetings && (
+        <UpcomingMeeting
+          enable={showUpcomingMeetings}
+          setEnable={setShowUpcomingMeetings}
+        />
+      )}
+      {showCreateLink && (
+        <CreateLink enable={showCreateLink} setEnable={setShowCreateLink} />
+      )}
+      {joinMeeting && (
+        <JoinMeeting enable={joinMeeting} setEnable={setJoinMeeting} />
+      )}
+    </>
   );
 }
